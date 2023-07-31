@@ -7,4 +7,5 @@ import pl.chmielewski.CfsaSuite.entity.CfsaUser;
 @Repository
 public interface CfsaUserRepo extends JpaRepository<CfsaUser, Long> {
 
+    CfsaUser findAllByUsername(String username);
 }
