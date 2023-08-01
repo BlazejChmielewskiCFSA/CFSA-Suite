@@ -1,4 +1,4 @@
-package pl.chmielewski.CfsaSuite.entity;
+package pl.chmielewski.CfsaSuite.LoginModule.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,6 +18,15 @@ public class CfsaUser implements UserDetails {
     private Long id;
     private String username;
     private String password;
+    private boolean isEnable;
+
+    public boolean isEnable() {
+        return isEnable;
+    }
+
+    public void setEnable(boolean enable) {
+        isEnable = enable;
+    }
 
     public CfsaUser() {
     }
@@ -57,7 +66,7 @@ public class CfsaUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isEnable;
     }
 
     public void setUsername(String username) {
