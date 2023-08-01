@@ -1,4 +1,4 @@
-package pl.chmielewski.CfsaSuite.entity;
+package pl.chmielewski.CfsaSuite.LoginModule.entity;
 
 import javax.persistence.*;
 
@@ -9,7 +9,6 @@ public class VerificationToken {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String value;
-
     @OneToOne
     private CfsaUser cfsaUser;
 
