@@ -156,3 +156,7 @@ a:hover, .label-checkbox:hover{
     align-items: center;
     padding: 0px 0px 10px 0px;
 }
+
+.margin-top{
+    margin-top: 10px;
+}
