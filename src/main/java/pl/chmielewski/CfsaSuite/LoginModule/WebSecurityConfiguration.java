@@ -1,4 +1,4 @@
-package pl.chmielewski.CfsaSuite;
+package pl.chmielewski.CfsaSuite.LoginModule;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,10 +32,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/foradmin").hasRole("ADMIN")
-                .antMatchers("/foruser").hasRole("USER")
+                .antMatchers("/home").hasRole("USER")
+                .antMatchers("/signup").permitAll()
                 .and()
-                .formLogin().permitAll()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/home").permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/forall");
+                .logout().logoutSuccessUrl("/forall")
+                .and()
+                .rememberMe().rememberMeCookieName("CFSA-Suite-Cookie").rememberMeParameter("remember-me"); // "rememberMeParameter" do podmiany w html
     }
 }
