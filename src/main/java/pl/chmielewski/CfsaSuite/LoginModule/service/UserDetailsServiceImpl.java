@@ -1,4 +1,4 @@
-package pl.chmielewski.CfsaSuite;
+package pl.chmielewski.CfsaSuite.LoginModule.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.chmielewski.CfsaSuite.repository.CfsaUserRepo;
+import pl.chmielewski.CfsaSuite.LoginModule.repository.CfsaUserRepo;
 
 @Primary
 @Service

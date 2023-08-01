@@ -1,4 +1,4 @@
-package pl.chmielewski.CfsaSuite.service;
+package pl.chmielewski.CfsaSuite.LoginModule.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;

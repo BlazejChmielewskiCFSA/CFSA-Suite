@@ -1,12 +1,12 @@
-package pl.chmielewski.CfsaSuite.controller;
+package pl.chmielewski.CfsaSuite.LoginModule.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import pl.chmielewski.CfsaSuite.entity.CfsaUser;
-import pl.chmielewski.CfsaSuite.service.UserService;
+import pl.chmielewski.CfsaSuite.LoginModule.entity.CfsaUser;
+import pl.chmielewski.CfsaSuite.LoginModule.service.UserService;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +38,8 @@ public class MainController {
     }
 
     @RequestMapping("/verify-token")
-    public String register(@RequestParam String token) {
-        return "";
+    public ModelAndView register(@RequestParam String token) {
+        userService.verifyToken(token);
+        return new ModelAndView("redirect:/login");
     }
 }
