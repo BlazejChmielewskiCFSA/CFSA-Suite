@@ -1,12 +1,12 @@
-package pl.chmielewski.CfsaSuite.service;
+package pl.chmielewski.CfsaSuite.LoginModule.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.chmielewski.CfsaSuite.entity.CfsaUser;
-import pl.chmielewski.CfsaSuite.entity.VerificationToken;
-import pl.chmielewski.CfsaSuite.repository.CfsaUserRepo;
-import pl.chmielewski.CfsaSuite.repository.VerificationTokenRepo;
+import pl.chmielewski.CfsaSuite.LoginModule.entity.CfsaUser;
+import pl.chmielewski.CfsaSuite.LoginModule.entity.VerificationToken;
+import pl.chmielewski.CfsaSuite.LoginModule.repository.CfsaUserRepo;
+import pl.chmielewski.CfsaSuite.LoginModule.repository.VerificationTokenRepo;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -37,12 +37,17 @@ public class UserService {
         verificationTokenRepo.save(verificationToken);
 
         String url = "http://" +
-                request.getServerName() +
-                ":" +
+                request.getServerName() + ":" +
                 request.getServerPort() +
                 request.getContextPath() +
-                "verify-token?token=" + token;
+                "/verify-token?token=" + token;
 
         mailSenderService.sendMail(cfsaUser.getUsername(), "Verification Token", url, false);
+    }
+
+    public void verifyToken(String token) {
+        CfsaUser cfsaUser = verificationTokenRepo.findByValue(token).getCfsaUser();
+        cfsaUser.setEnable(true);
+        cfsaUserRepo.save(cfsaUser);
     }
 }
