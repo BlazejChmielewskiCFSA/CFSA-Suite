@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www/thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/stylein.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,200&display=swap" rel="stylesheet" />
 </head>
 <body>
+    <nav>
+        <img class="logo" th:src="@{/img/logo.png}" alt="logo"/>
+        <div>
+            <ul class="nav-links">
+                <li><a href="#">Zgłoszenia</a></li>
+                <li><a href="#">Aplikacje</a></li>
+                <li><a href="#">Konto</a></li>
+            </ul>
+        </div>
+        <a class="" href="http://localhost:8080/pomoc-it"><button>Pomoc IT</button></a>
+    </nav>
+    <div>
+        aaa
+    </div>
 
 </body>
 </html>
