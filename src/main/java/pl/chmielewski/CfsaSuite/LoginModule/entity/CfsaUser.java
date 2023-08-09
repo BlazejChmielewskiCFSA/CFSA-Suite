@@ -19,6 +19,15 @@ public class CfsaUser implements UserDetails {
     private String username;
     private String password;
     private boolean isEnable;
+    private boolean isAdmin = false;
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     public boolean isEnable() {
         return isEnable;
@@ -75,7 +84,11 @@ public class CfsaUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (isAdmin == false)
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+        else {
+            return Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
     }
 
     public String getPassword() {
