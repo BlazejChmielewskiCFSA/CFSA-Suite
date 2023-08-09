@@ -1,0 +1,127 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+body{
+    background-color: rgb(251, 250, 245);
+    font-family: 'Montserrat', sans-serif;
+}
+
+:root{
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
+    --tran-06: all 0.6s ease;
+    --tran-10: all 1s ease;
+}
+
+li, a, button {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+nav {
+    background-color: #23252A;
+    height: 70px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 6px 5%;
+}
+
+.logo {
+    cursor: pointer;
+    margin-right: auto;
+}
+
+.nav-links{
+    list-style: none;
+}
+
+.nav-links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav-links li a {
+    transition: var(--tran-03);
+}
+
+.nav-links li a:hover {
+    color: rgb(47, 146, 98,1);
+}
+
+button {
+    margin-left: 20px;
+    padding: 9px 25px;
+    background-color: rgb(47, 146, 98,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--tran-03);
+
+}
+
+button:hover {
+    background-color: rgba(47, 146, 98, 0.8);
+}
+
+/*--------------------| token-info |-------------------- */
+
+.ti-container {
+    width: 350px;
+    height: 375px;
+    background-color: #fff;
+    border-radius: 20px;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: var(--tran-10);
+    -webkit-box-shadow: 0px 0px 20px -3px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 0px 20px -3px rgba(66, 68, 90, 1);
+    box-shadow: 0px 0px 20px -3px rgba(66, 68, 90, 1);
+    
+}
+
+.ti-upper-container img {
+    transform:scale(140%);
+    transition: var(--tran-10);
+    
+}
+
+.ti-upper-container {
+    background-color: rgb(47, 146, 98,1);
+    width: auto;
+    height: 200px;
+    border-radius: 20px;
+    transition: var(--tran-06);
+}
+
+
+.ti-image-container {
+    padding: 50px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ti-lower-container {
+    color: #23252A;
+    text-align: center;
+    padding: 15px;
+}
+
+.ti-container span {
+    transform: translate(50px, 100px);
+    
+}
+
+/*--------------------|  |-------------------- */
+/*--------------------|  |-------------------- */
+/*--------------------|  |-------------------- */
