@@ -2,6 +2,7 @@ package pl.chmielewski.CfsaSuite.LoginModule.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +27,11 @@ public class MainController {
         return "login";
     }
 
+    @RequestMapping("/token-info")
+    public String tokenInfo() {
+        return "token-info";
+    }
+
     @RequestMapping("/signup")
     public ModelAndView signup() {
         return new ModelAndView("registration", "user", new CfsaUser());
@@ -34,12 +40,17 @@ public class MainController {
     @RequestMapping("/register")
     public ModelAndView register(CfsaUser cfsaUser, HttpServletRequest request) throws MessagingException {
         userService.addNewUser(cfsaUser, request);
-        return new ModelAndView("redirect:/login");
+        return new ModelAndView("redirect:/token-info");
     }
 
     @RequestMapping("/verify-token")
     public ModelAndView register(@RequestParam String token) {
         userService.verifyToken(token);
         return new ModelAndView("redirect:/login");
+    }
+
+    @RequestMapping("/pomoc-it")
+    public String pomocIt(){
+        return "pomoc-it";
     }
 }
