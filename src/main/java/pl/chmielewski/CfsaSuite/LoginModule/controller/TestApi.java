@@ -2,9 +2,6 @@ package pl.chmielewski.CfsaSuite.LoginModule.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.security.Principal;
 
 @Controller
 public class TestApi {
@@ -16,7 +13,7 @@ public class TestApi {
 
     @GetMapping("foradmin")
     public String forAdmin(){
-        return "forAdmin";
+        return "admin";
     }
 
     @GetMapping("home")
