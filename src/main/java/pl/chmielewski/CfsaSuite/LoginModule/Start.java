@@ -17,10 +17,12 @@ public class Start {
         this.passwordEncoder = passwordEncoder;
         this.cfsaUserRepo = cfsaUserRepo;
 
+        //Template tworzenia nowego admina
         CfsaUser cfsaUser = new CfsaUser();
-        cfsaUser.setUsername("Przemek");
+        cfsaUser.setUsername("blazej");
         cfsaUser.setPassword(passwordEncoder.encode("Przemek123"));
         cfsaUser.setEnable(true);
+        cfsaUser.setAdmin(true);
         cfsaUserRepo.save(cfsaUser);
     }
 }
