@@ -32,12 +32,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/foradmin").hasRole("ADMIN")
-                .antMatchers("/home").hasRole("USER")
+                .antMatchers("/home").hasAnyRole("USER","ADMIN")
                 .antMatchers("/signup").permitAll()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/home").permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/forall")
+                .logout().logoutSuccessUrl("/login")
                 .and()
                 .rememberMe().rememberMeCookieName("CFSA-Suite-Cookie").rememberMeParameter("remember-me"); // "rememberMeParameter" do podmiany w html
     }
