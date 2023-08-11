@@ -57,6 +57,11 @@ public class MainController {
         return new ModelAndView("redirect:/login");
     }
 
+    @GetMapping
+    public String getZgloszenieWidok(){
+        return "zgloszenie";
+    }
+
     //TWORZENIE NOWEGO ZGŁOSZENIA
     @GetMapping("/report-form")
     public String getReportForm(Model model) {
@@ -73,9 +78,15 @@ public class MainController {
 
     @GetMapping("/zgloszenia")
     public String forUser(Model model) {
-        model.addAttribute("username", reportService.getReportOwner());
-        model.addAttribute("reports", reportService.getAllReports());
+        model.addAttribute("reportsList", reportService.getAllReports());
         return "zgloszenia";
+    }
+
+    @GetMapping("/zgloszenie/{id}")
+    public String zgloszenieDetails(@PathVariable Long id, Model model){
+        Report report = reportService.getReportById(id);
+        model.addAttribute("report", report);
+        return "zgloszenie-szczegoly";
     }
 
 }
