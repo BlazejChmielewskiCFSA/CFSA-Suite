@@ -3,6 +3,7 @@ package pl.chmielewski.CfsaSuite.LoginModule.entity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Departments;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,7 @@ public class CfsaUser implements UserDetails {
     private Long id;
     private String username;
     private String password;
+    private Departments departments;
     private boolean isEnable;
     private boolean isAdmin = false;
 
@@ -40,10 +42,11 @@ public class CfsaUser implements UserDetails {
     public CfsaUser() {
     }
 
-    public CfsaUser(Long id, String username, String password) {
+    public CfsaUser(Long id, String username, String password, Departments departments) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.departments = departments;
     }
 
     public Long getId() {
@@ -56,6 +59,14 @@ public class CfsaUser implements UserDetails {
 
     public String getUsername() {
         return username;
+    }
+
+    public Departments getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(Departments departments) {
+        this.departments = departments;
     }
 
     @Override
