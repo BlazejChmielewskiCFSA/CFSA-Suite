@@ -18,16 +18,19 @@
                     <th>Tytuł Zgłoszenia</th>
                     <th>Zgłaszający</th>
                     <th>Priorytet</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="report : ${reports}"><!--th:each="report : ${reports}"-->
-                    <td th:text="${report.getId()}"></td>
+                <tr th:each="report : ${reportsList}">
+
+                    <td><a th:href="@{'/zgloszenie/' + ${report.getId()}}" th:text="${report.id}"></a></td>
+                    <!-- <a th:href="@{'/zgloszenia/details/' + ${report.id}}"></a><td th:text="'#' + ${report.getId()}"></td> -->
                     <td th:text="${report.getHeader()}"></td>
                     <td><p th:text="${report.getOwner()}"></p></td>
                     <td><p class="priority" th:text="${report.getPriority()}"></p></td>
+                    <td><p class="status" th:text="${report.getStatus()}"></p></td> 
                 </tr>
-            </tbody>
         </table>
     </div>
 </body>
