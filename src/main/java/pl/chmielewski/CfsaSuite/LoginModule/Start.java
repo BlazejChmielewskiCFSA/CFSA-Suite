@@ -20,7 +20,7 @@ public class Start {
         //Template tworzenia nowego admina
         CfsaUser cfsaUser = new CfsaUser();
         cfsaUser.setUsername("blazej");
-        cfsaUser.setPassword(passwordEncoder.encode("Przemek123"));
+        cfsaUser.setPassword(passwordEncoder.encode("blazej"));
         cfsaUser.setEnable(true);
         cfsaUser.setAdmin(true);
         cfsaUserRepo.save(cfsaUser);
