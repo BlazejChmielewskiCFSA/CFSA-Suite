@@ -1,6 +1,8 @@
 package pl.chmielewski.CfsaSuite.LoginModule.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.CfsaUser;
@@ -49,5 +51,10 @@ public class UserService {
         CfsaUser cfsaUser = verificationTokenRepo.findByValue(token).getCfsaUser();
         cfsaUser.setEnable(true);
         cfsaUserRepo.save(cfsaUser);
+    }
+
+    public String getUserName(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
     }
 }
