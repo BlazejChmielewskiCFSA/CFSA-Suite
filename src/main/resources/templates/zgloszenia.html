@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:replace="home :: link"></div>
+    <script src="/script.js"></script>
+</head>
+<body>
+
+<div th:replace="home :: nav"></div>
+
+<div class="zgloszenia-main-content">
+        <table class="table-my-reports" >
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Tytuł Zgłoszenia</th>
+                    <th>Zgłaszający</th>
+                    <th>Priorytet</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="report : ${reports}"><!--th:each="report : ${reports}"-->
+                    <td th:text="${report.getId()}"></td>
+                    <td th:text="${report.getHeader()}"></td>
+                    <td><p th:text="${report.getOwner()}"></p></td>
+                    <td><p class="priority" th:text="${report.getPriority()}"></p></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+
+</html>
+
+
