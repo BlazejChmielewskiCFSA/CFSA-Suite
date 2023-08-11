@@ -8,19 +8,18 @@
 </head>
 <body>
     <nav>
-        <img class="logo" th:src="@{/img/logo.png}" alt="logo"/>
+        <a href="http://localhost:8080/home">
+            <img class="logo" th:src="@{/img/logo.png}" alt="logo"/>
+        </a>
         <div>
             <ul class="nav-links">
-                <li><a href="#">Zgłoszenia</a></li>
+                <li><a href="http://localhost:8080/zgloszenia">Zgłoszenia</a></li>
                 <li><a href="#">Aplikacje</a></li>
                 <li><a href="#">Konto</a></li>
             </ul>
         </div>
-        <a class="" href="http://localhost:8080/pomoc-it"><button>Pomoc IT</button></a>
+        <a th:href="@{/report-form}"><button>Pomoc IT</button></a>
     </nav>
-    <div>
-        aaa
-    </div>
-
+    home
 </body>
 </html>
