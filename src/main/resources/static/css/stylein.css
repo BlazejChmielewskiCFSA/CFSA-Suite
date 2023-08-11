@@ -155,7 +155,7 @@ button:hover {
     font-weight: bold; 
 }
 .table-my-reports th{
-    text-align: left;
+    text-align: center;
 }
 
 
@@ -196,10 +196,25 @@ button:hover {
     text-overflow: ellipsis; 
 }
 
+.table-my-reports td:nth-child(4){
+    padding: 12px 10px;
+    font-size: 10px;
+    min-width: 120px;
+}
+
+.table-my-reports td:nth-child(5){
+    padding: 12px 15px;
+    font-size: 10px;
+    min-width: 120px;
+}
+
 .priority {
     text-align: center;
     padding: .4rem 0;
     border-radius: 2rem;
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
  }
 
 .natychmiastowy {
@@ -223,12 +238,31 @@ button:hover {
  }
 
 .niski {
+    background-color: rgb(220, 220, 220);
+    color: rgb(100, 100, 100);
+ }
+
+.status {
+    text-align: center;
+    padding: .4rem 0;
+    border-radius: 2rem;
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+}
+.zamkniety {
     background-color: rgb(200, 200, 200);
     color: rgb(100, 100, 100);
  }
 
+.rozwiazywany {
+    background-color: rgb(173, 216, 230);
+    color: rgb(25, 77, 109);
+ }
 
-
-
+.oczekujacy {
+    background-color: rgb(255, 204, 153);
+    color: rgb(153, 76, 0);
+ }
 /*--------------------|  |-------------------- */
 /*--------------------|  |-------------------- */
