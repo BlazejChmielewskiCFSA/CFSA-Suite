@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:replace="home :: link"></div>
+</head>
+<body>
+<div th:replace="home :: nav"></div>
+<h1>Szczegóły Zgłoszenia</h1>
+<p>ID: <span th:text="${report.getId()}"></span></p>
+<p>Tytuł: <span th:text="${report.getHeader()}"></span></p>
+</body>
+</html>
