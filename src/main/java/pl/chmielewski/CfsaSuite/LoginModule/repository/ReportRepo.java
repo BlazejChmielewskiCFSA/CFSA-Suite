@@ -6,4 +6,5 @@ import pl.chmielewski.CfsaSuite.LoginModule.entity.Report;
 
 @Repository
 public interface ReportRepo extends JpaRepository<Report, Long> {
+    Report findAllById(Long id);
 }
