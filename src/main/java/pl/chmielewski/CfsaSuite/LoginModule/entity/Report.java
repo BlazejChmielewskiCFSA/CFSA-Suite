@@ -1,6 +1,7 @@
 package pl.chmielewski.CfsaSuite.LoginModule.entity;
 
 import pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Priority;
+import pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Status;
 
 import javax.persistence.*;
 
@@ -14,15 +15,17 @@ public class Report {
     private String body;
     private String owner;
     private Priority priority;
+    private Status status;
 
     public Report() {
     }
 
-    public Report(String header, String body, String owner, Priority priority) {
+    public Report(String header, String body, String owner, Priority priority, Status status) {
         this.header = header;
         this.body = body;
         this.owner = owner;
         this.priority = priority;
+        this.status = status;
     }
 
     public Long getId() {
@@ -65,6 +68,12 @@ public class Report {
         this.priority = priority;
     }
 
+    public Status getStatus() {
+        return status;
+    }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }
 
