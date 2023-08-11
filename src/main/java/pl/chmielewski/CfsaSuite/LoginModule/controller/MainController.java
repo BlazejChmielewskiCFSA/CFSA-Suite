@@ -2,11 +2,12 @@ package pl.chmielewski.CfsaSuite.LoginModule.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.CfsaUser;
+import pl.chmielewski.CfsaSuite.LoginModule.entity.Report;
+import pl.chmielewski.CfsaSuite.LoginModule.service.ReportService;
 import pl.chmielewski.CfsaSuite.LoginModule.service.UserService;
 
 import javax.mail.MessagingException;
@@ -16,10 +17,17 @@ import javax.servlet.http.HttpServletRequest;
 public class MainController {
 
     private UserService userService;
+    private ReportService reportService;
 
     @Autowired
-    public MainController(UserService userService) {
+    public MainController(UserService userService, ReportService reportService) {
         this.userService = userService;
+        this.reportService = reportService;
+    }
+
+    @GetMapping("/home")
+    public String getHome() {
+        return "home";
     }
 
     @RequestMapping("/login")
@@ -49,8 +57,25 @@ public class MainController {
         return new ModelAndView("redirect:/login");
     }
 
-    @RequestMapping("/pomoc-it")
-    public String pomocIt(){
-        return "pomoc-it";
+    //TWORZENIE NOWEGO ZGŁOSZENIA
+    @GetMapping("/report-form")
+    public String getReportForm(Model model) {
+        Report report = new Report();
+        model.addAttribute("newReportForm", report);
+        return "report-form";
     }
+
+    @PostMapping("/addReport")
+    public String sendReportForm(@ModelAttribute Report report) {
+        reportService.addNewReport(report);
+        return "redirect:/zgloszenia";
+    }
+
+    @GetMapping("/zgloszenia")
+    public String forUser(Model model) {
+        model.addAttribute("username", reportService.getReportOwner());
+        model.addAttribute("reports", reportService.getAllReports());
+        return "zgloszenia";
+    }
+
 }
