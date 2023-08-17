@@ -5,13 +5,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Departments;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Entity
+@Table(name = "cfsa_users")
 public class CfsaUser implements UserDetails {
 
     @Id
@@ -22,6 +23,16 @@ public class CfsaUser implements UserDetails {
     private Departments departments;
     private boolean isEnable;
     private boolean isAdmin = false;
+    @OneToMany(mappedBy = "cfsaUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Report> reports = new ArrayList<>();
+
+    public List<Report> getReports() {
+        return reports;
+    }
+
+    public void setReports(List<Report> reports) {
+        this.reports = reports;
+    }
 
     public boolean isAdmin() {
         return isAdmin;
@@ -108,14 +119,5 @@ public class CfsaUser implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "CfsaUser{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }

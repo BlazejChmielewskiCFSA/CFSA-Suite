@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<form class="form-contact" th:action="@{/register}" method="post">
+<form class="form-contact" th:action="@{/register}" th:object="${newCfsaUser}" method="post">
   <div>
     <div class="box-circle">
       <img class="icon-user-big" src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/256/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png" alt="external-user-interface-kiranshastry-solid-kiranshastry-1"/>
@@ -25,7 +25,11 @@
     <img class="icon-padlock-small" src="https://img.icons8.com/material-outlined/72/ffffff/lock-2.png" alt="lock-2"/>
     <input type="password" class="input-form" name="password" id="password" placeholder="Password"/>
   </div>
-
+  <select id="departments" name="departments" th:field="*{departments}">
+    <option th:each="departments : ${departamentsList}"
+            th:value="${departments}"
+            th:text="${departments}"></option>
+  </select>
   <input class="btn-login margin-top"  type="submit" value="Zarejestruj"/>
 </form>
 

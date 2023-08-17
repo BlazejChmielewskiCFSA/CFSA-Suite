@@ -57,4 +57,5 @@ public class UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
     }
+
 }

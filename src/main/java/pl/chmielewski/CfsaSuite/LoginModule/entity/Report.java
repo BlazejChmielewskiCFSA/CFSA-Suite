@@ -6,6 +6,7 @@ import pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Status;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "reports")
 public class Report {
 
     @Id
@@ -17,15 +18,29 @@ public class Report {
     private Priority priority;
     private Status status;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cfsauser_id")
+    private CfsaUser cfsaUser;
+
     public Report() {
     }
 
-    public Report(String header, String body, String owner, Priority priority, Status status) {
+    public Report(Long id, String header, String body, String owner, Priority priority, Status status, CfsaUser cfsaUser) {
+        this.id = id;
         this.header = header;
         this.body = body;
         this.owner = owner;
         this.priority = priority;
         this.status = status;
+        this.cfsaUser = cfsaUser;
+    }
+
+    public CfsaUser getCfsaUser() {
+        return cfsaUser;
+    }
+
+    public void setCfsaUser(CfsaUser cfsaUser) {
+        this.cfsaUser = cfsaUser;
     }
 
     public Long getId() {

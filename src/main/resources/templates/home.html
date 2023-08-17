@@ -8,10 +8,10 @@
 </head>
 <body>
     <nav>
-        <a href="http://localhost:8080/home">
-            <img class="logo" th:src="@{/img/logo.png}" alt="logo"/>
+        <a class="logo" href="http://localhost:8080/home">
+            <img  th:src="@{/img/logo.png}" alt="logo"/>
         </a>
-        <div>
+        <div>            
             <ul class="nav-links">
                 <li><a href="http://localhost:8080/zgloszenia">Zgłoszenia</a></li>
                 <li><a href="#">Aplikacje</a></li>
@@ -20,6 +20,26 @@
         </div>
         <a th:href="@{/report-form}"><button>Pomoc IT</button></a>
     </nav>
-    home
+    <h1>Wszystkie</h1>
+    <table class="table-my-reports" >
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Tytuł Zgłoszenia</th>
+            <th>Zgłaszający</th>
+            <th>Priorytet</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="report : ${reportsList}"
+            th:onclick="'window.open(\'' + @{/zgloszenie/} + ${report.getId()} + '\', \'_blank\');'">
+            <td><a th:href="@{/zgloszenie/{id}(id=${report.getId()})}" target="_blank" th:text="${report.getId()}"></a></td>
+            <td th:text="${report.getHeader()}"></td>
+            <td><p th:text="${report.getOwner()}"></p></td>
+            <td><p class="priority" th:text="${report.getPriority()}"></p></td>
+            <td><p class="status" th:text="${report.getStatus()}"></p></td>
+        </tr>
+    </table>
 </body>
 </html>

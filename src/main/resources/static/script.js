@@ -59,4 +59,18 @@ window.onload = function() {
               }
             })
 
-      };
+      document.addEventListener("DOMContentLoaded", function() {
+          const rows = document.querySelectorAll("tr[data-href]");
+          rows.forEach(row => {
+            row.addEventListener("click", () => {
+              const url = row.getAttribute("data-href");
+              if (url) {
+                window.location.href = url;
+              }
+            });
+            // Zmiana kursora na wskazujący na link
+            row.style.cursor = "pointer";
+          });
+        });
+
+};

@@ -2,7 +2,6 @@
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
-    
 }
 
 body{
@@ -18,7 +17,7 @@ body{
     --tran-10: all 1s ease;
 }
 
-li, a, button {
+li, button, a {
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -40,7 +39,7 @@ nav {
     margin-right: auto;
 }
 
-.nav-links{
+.nav-links {
     list-style: none;
 }
 
@@ -65,7 +64,6 @@ button {
     border-radius: 50px;
     cursor: pointer;
     transition: var(--tran-03);
-
 }
 
 button:hover {
@@ -154,14 +152,22 @@ button:hover {
     text-align: left;
     font-weight: bold; 
 }
+
+.table-my-reports tr:hover{
+    cursor:pointer}
+
 .table-my-reports th{
     text-align: center;
 }
 
-
 .table-my-reports th,
 .table-my-reports td {
     padding: 12px 15px;
+}
+
+.table-my-reports a {
+    color: black;
+    font-weight: normal;
 }
 
 .table-my-reports tbody tr{
@@ -176,11 +182,13 @@ button:hover {
     border-bottom: 2px solid rgba(47, 146, 98, 0.8);
 }
 
-.table-my-reports tr:hover > td {
+.table-my-reports tr:hover > td,
+.table-my-reports tr:hover > td a{
     cursor: pointer;
     color: rgba(47, 146, 98, 0.8);
     font-weight: 500;
 }
+
 
 .table-my-reports td:nth-child(2) {
     max-width: 500px;
@@ -265,4 +273,7 @@ button:hover {
     color: rgb(153, 76, 0);
  }
 /*--------------------|  |-------------------- */
+
+
+
 /*--------------------|  |-------------------- */

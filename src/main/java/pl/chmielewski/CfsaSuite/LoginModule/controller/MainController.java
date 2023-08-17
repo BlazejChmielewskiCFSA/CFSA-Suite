@@ -1,12 +1,13 @@
 package pl.chmielewski.CfsaSuite.LoginModule.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.CfsaUser;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.Report;
+import pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Departments;
 import pl.chmielewski.CfsaSuite.LoginModule.service.ReportService;
 import pl.chmielewski.CfsaSuite.LoginModule.service.UserService;
 
@@ -26,35 +27,39 @@ public class MainController {
     }
 
     @GetMapping("/home")
-    public String getHome() {
+    public String getHome(Model model) {
+        model.addAttribute("reportsList", reportService.getAllReports());
         return "home";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    @RequestMapping("/token-info")
+    @GetMapping("/token-info")
     public String tokenInfo() {
         return "token-info";
     }
 
-    @RequestMapping("/signup")
-    public ModelAndView signup() {
-        return new ModelAndView("registration", "user", new CfsaUser());
+    @GetMapping("/signup")
+    public String signup(Model model) {
+        CfsaUser cfsaUser = new CfsaUser();
+        model.addAttribute("departamentsList", Departments.values());
+        model.addAttribute("newCfsaUser",cfsaUser);
+        return "registration";
     }
 
-    @RequestMapping("/register")
-    public ModelAndView register(CfsaUser cfsaUser, HttpServletRequest request) throws MessagingException {
+    @PostMapping("/register")
+    public String register(CfsaUser cfsaUser, HttpServletRequest request) throws MessagingException {
         userService.addNewUser(cfsaUser, request);
-        return new ModelAndView("redirect:/token-info");
+        return "redirect:/token-info";
     }
 
-    @RequestMapping("/verify-token")
-    public ModelAndView register(@RequestParam String token) {
+    @GetMapping("/verify-token")
+    public String register(@RequestParam String token) {
         userService.verifyToken(token);
-        return new ModelAndView("redirect:/login");
+        return "redirect:/login";
     }
 
     @GetMapping
@@ -78,7 +83,9 @@ public class MainController {
 
     @GetMapping("/zgloszenia")
     public String forUser(Model model) {
-        model.addAttribute("reportsList", reportService.getAllReports());
+
+        ///////////////////////
+
         return "zgloszenia";
     }
 
