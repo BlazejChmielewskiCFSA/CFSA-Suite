@@ -53,9 +53,13 @@ public class UserService {
         cfsaUserRepo.save(cfsaUser);
     }
 
-    public String getUserName(){
+    public String getLoggedUserHisUsername(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
+    }
+
+    public CfsaUser getUserByUsername(String username){
+        return cfsaUserRepo.findAllByUsername(username);
     }
 
 }

@@ -22,9 +22,9 @@
                 </tr>
             </thead>
             <tbody>
-            <tr th:each="report : ${lista}"
-                th:onclick="'window.open(\'' + @{/zgloszenie/} + ${report.getId()} + '\', \'_blank\');'">
-                <td><a th:href="@{/zgloszenie/{id}(id=${report.getId()})}" target="_blank" th:text="'#' + ${report.getId()}"></a></td>
+            <tr th:each="report : ${ReportsListMadeByLoggedUser}"
+                th:onclick="'window.open(\'' + @{/report/} + ${report.getId()} + '\', \'_blank\');'">
+                <td><a th:href="@{/report/{id}(id=${report.getId()})}" target="_blank" th:text="'#' + ${report.getId()}"></a></td>
                 <td th:text="${report.getHeader()}"></td>
                 <td><p th:text="${report.getOwner()}"></p></td>
                 <td><p class="priority" th:text="${report.getPriority()}"></p></td>

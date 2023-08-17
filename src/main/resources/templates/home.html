@@ -3,43 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="/css/stylein.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,200&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/stylein.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,200&display=swap"
+          rel="stylesheet"/>
 </head>
 <body>
-    <nav>
-        <a class="logo" href="http://localhost:8080/home">
-            <img  th:src="@{/img/logo.png}" alt="logo"/>
-        </a>
-        <div>            
-            <ul class="nav-links">
-                <li><a href="http://localhost:8080/zgloszenia">Zgłoszenia</a></li>
-                <li><a href="#">Aplikacje</a></li>
-                <li><a href="#">Konto</a></li>
-            </ul>
-        </div>
-        <a th:href="@{/report-form}"><button>Pomoc IT</button></a>
-    </nav>
-    <h1>Wszystkie</h1>
-    <table class="table-my-reports" >
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Tytuł Zgłoszenia</th>
-            <th>Zgłaszający</th>
-            <th>Priorytet</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="report : ${reportsList}"
-            th:onclick="'window.open(\'' + @{/zgloszenie/} + ${report.getId()} + '\', \'_blank\');'">
-            <td><a th:href="@{/zgloszenie/{id}(id=${report.getId()})}" target="_blank" th:text="${report.getId()}"></a></td>
-            <td th:text="${report.getHeader()}"></td>
-            <td><p th:text="${report.getOwner()}"></p></td>
-            <td><p class="priority" th:text="${report.getPriority()}"></p></td>
-            <td><p class="status" th:text="${report.getStatus()}"></p></td>
-        </tr>
-    </table>
+<nav>
+    <a class="logo" href="@{/home}">
+        <img th:src="@{/img/logo.png}" alt="logo"/>
+    </a>
+    <div>
+        <ul class="nav-links">
+            <li><a th:href="@{/reports}">Zgłoszenia</a></li>
+            <li><a href="#">Aplikacje</a></li>
+            <li><a href="#">Konto</a></li>
+        </ul>
+    </div>
+    <a th:href="@{/report-form}">
+        <button>Pomoc IT</button>
+    </a>
+</nav>
+<h1>Wszystkie</h1>
+<table class="table-my-reports">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Tytuł Zgłoszenia</th>
+        <th>Zgłaszający</th>
+        <th>Priorytet</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="report : ${reportsList}"
+        th:onclick="'window.open(\'' + @{/report/} + ${report.getId()} + '\', \'_blank\');'">
+        <td><a th:href="@{/report/{id}(id=${report.getId()})}" target="_blank" th:text="${report.getId()}"></a></td>
+        <td th:text="${report.getHeader()}"></td>
+        <td><p th:text="${report.getOwner()}"></p></td>
+        <td><p class="priority" th:text="${report.getPriority()}"></p></td>
+        <td><p class="status" th:text="${report.getStatus()}"></p></td>
+    </tr>
+</table>
 </body>
 </html>

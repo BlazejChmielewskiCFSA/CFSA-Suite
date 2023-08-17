@@ -1,7 +1,6 @@
 package pl.chmielewski.CfsaSuite.LoginModule.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +12,15 @@ import pl.chmielewski.CfsaSuite.LoginModule.service.UserService;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
 
     private UserService userService;
     private ReportService reportService;
+
 
     @Autowired
     public MainController(UserService userService, ReportService reportService) {
@@ -27,18 +29,18 @@ public class MainController {
     }
 
     @GetMapping("/home")
-    public String getHome(Model model) {
+    public String getHomeView(Model model) {
         model.addAttribute("reportsList", reportService.getAllReports());
         return "home";
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String getLoginView() {
         return "login";
     }
 
     @GetMapping("/token-info")
-    public String tokenInfo() {
+    public String tokenInfoView() {
         return "token-info";
     }
 
@@ -51,49 +53,46 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public String register(CfsaUser cfsaUser, HttpServletRequest request) throws MessagingException {
+    public String registerPost(CfsaUser cfsaUser, HttpServletRequest request) throws MessagingException {
         userService.addNewUser(cfsaUser, request);
         return "redirect:/token-info";
     }
 
     @GetMapping("/verify-token")
-    public String register(@RequestParam String token) {
+    public String verifyTokenRedirect(@RequestParam String token) {
         userService.verifyToken(token);
         return "redirect:/login";
     }
 
-    @GetMapping
-    public String getZgloszenieWidok(){
-        return "zgloszenie";
-    }
 
     //TWORZENIE NOWEGO ZGŁOSZENIA
     @GetMapping("/report-form")
-    public String getReportForm(Model model) {
+    public String getReportFormView(Model model) {
         Report report = new Report();
         model.addAttribute("newReportForm", report);
         return "report-form";
     }
 
     @PostMapping("/addReport")
-    public String sendReportForm(@ModelAttribute Report report) {
+    public String sendReportFormPost(@ModelAttribute Report report) {
         reportService.addNewReport(report);
-        return "redirect:/zgloszenia";
+        return "redirect:/reports";
     }
 
-    @GetMapping("/zgloszenia")
+    @GetMapping("/reports")
     public String forUser(Model model) {
-
-        ///////////////////////
-
-        return "zgloszenia";
+        List<Report> ReportsListMadeByLoggedUser = reportService.getAllReports().stream()
+                .filter(n -> n.getOwner().equals(userService.getLoggedUserHisUsername()))
+                .collect(Collectors.toList());
+        model.addAttribute("ReportsListMadeByLoggedUser", ReportsListMadeByLoggedUser);
+        return "reports";
     }
 
-    @GetMapping("/zgloszenie/{id}")
-    public String zgloszenieDetails(@PathVariable Long id, Model model){
+    @GetMapping("/report/{id}")
+    public String reportDetails(@PathVariable Long id, Model model){
         Report report = reportService.getReportById(id);
         model.addAttribute("report", report);
-        return "zgloszenie-szczegoly";
+        return "report-details";
     }
 
 }

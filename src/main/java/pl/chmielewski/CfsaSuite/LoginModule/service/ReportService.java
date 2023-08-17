@@ -1,16 +1,11 @@
 package pl.chmielewski.CfsaSuite.LoginModule.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
-import pl.chmielewski.CfsaSuite.LoginModule.entity.CfsaUser;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.Report;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Status;
 import pl.chmielewski.CfsaSuite.LoginModule.repository.ReportRepo;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +15,11 @@ public class ReportService {
     private ReportRepo reportRepo;
     private UserService userService;
     private List<Report> reportList = new ArrayList<>();
-    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public ReportService(ReportRepo reportRepo, UserService userService, JdbcTemplate jdbcTemplate) {
+    public ReportService(ReportRepo reportRepo, UserService userService) {
         this.reportRepo = reportRepo;
         this.userService = userService;
-        this.jdbcTemplate = jdbcTemplate;
     }
 
     public List<Report> getAllReports() {
@@ -38,10 +31,11 @@ public class ReportService {
     }
 
     public void addNewReport(Report newReport) {
-        newReport.setOwner(userService.getUserName());
-        newReport.setStatus(Status.Oczekujacy);
         String header = newReport.getHeader().substring(0, 1).toUpperCase() + newReport.getHeader().substring(1);
+        newReport.setOwner(userService.getLoggedUserHisUsername());
         newReport.setHeader(header);
+        newReport.setStatus(Status.Oczekujacy);
+        newReport.setCfsaUser(userService.getUserByUsername(userService.getLoggedUserHisUsername()));
         reportList.add(newReport);
         reportRepo.save(newReport);
     }
