@@ -9,32 +9,84 @@
 <body>
 
 <div th:replace="home :: nav"></div>
-
-<div class="zgloszenia-main-content">
-        <table class="table-my-reports" >
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Tytuł Zgłoszenia</th>
-                    <th>Zgłaszający</th>
-                    <th>Priorytet</th>
-                    <th>Status</th>
+    <div class="reports-main-container">
+        <div class="reports-filter-container-main"> 
+            <div class="reports-main-center">
+                <label class="reports-filter-label">Filtrowanie</label>
+            <form th:action="@{/addFilter}" method="post">
+                <div class="reports-filter-container-single">
+                    <div class="reports-single-filter">
+                        <input class="reports-single-filter-checkbox" type="checkbox" id="statusValue" name="statusValue">
+                        <select class="reports-single-filter-select" id="status" name="status">
+                            <option value="" style="display: none;">Status</option>
+                            <option th:each="status : ${T(pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Status).values()}"
+                                    th:value="${status}"
+                                    th:text="${status}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="reports-single-filter">
+                        <input class="reports-single-filter-checkbox" type="checkbox" id="priorityValue" name="priorityValue">
+                        <select class="reports-single-filter-select" id="priority" name="priority">
+                            <option value="" style="display: none;">Priorytet</option>
+                            <option th:each="priority : ${T(pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Priority).values()}"
+                            th:value="${priority}"
+                            th:text="${priority}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="reports-single-filter">
+                        <input class="reports-single-filter-checkbox" type="checkbox" id="departmentValue" name="departmentValue">
+                        <select class="reports-single-filter-select" id="departments" name="departments">
+                            <option value="" style="display: none;">Dział</option>
+                            <option th:each="departments : ${departments}"
+                                    th:value="${departments}"
+                                    th:text="${departments}">
+                            </option>
+                        </select>
+                    </div>
+                    <button class="reports-single-filter-button" type="submit">Filtruj</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        <div class="reports-filter-container-main"> 
+            <div class="reports-main-center">
+                <label class="reports-search-label">Wyszukiwanie</label>
+            <form>
+                <div class="reports-search-box">
+                    <input placeholder="Wpisz fraze do wyszukania">
+                    <button class="reports-single-filter-button" type="submit">Wyszukaj</button>
+                </div>
+                
+            </form>
+            </div>
+        </div>
+    </div>
+    <div class="zgloszenia-main-content">
+            <table class="table-my-reports" >
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Tytuł Zgłoszenia</th>
+                        <th>Zgłaszający</th>
+                        <th>Priorytet</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="report : ${filtredList}"
+                    th:onclick="'window.open(\'' + @{/report/} + ${report.getId()} + '\', \'_blank\');'">
+                    <td><a th:href="@{/report/{id}(id=${report.getId()})}" target="_blank" th:text="'#' + ${report.getId()}"></a></td>
+                    <td th:text="${report.getHeader()}"></td>
+                    <td><p th:text="${report.getOwner()}"></p></td>
+                    <td><p class="priority" th:text="${report.getPriority()}"></p></td>
+                    <td><p class="status" th:text="${report.getStatus()}"></p></td>
                 </tr>
-            </thead>
-            <tbody>
-            <tr th:each="report : ${ReportsListMadeByLoggedUser}"
-                th:onclick="'window.open(\'' + @{/report/} + ${report.getId()} + '\', \'_blank\');'">
-                <td><a th:href="@{/report/{id}(id=${report.getId()})}" target="_blank" th:text="'#' + ${report.getId()}"></a></td>
-                <td th:text="${report.getHeader()}"></td>
-                <td><p th:text="${report.getOwner()}"></p></td>
-                <td><p class="priority" th:text="${report.getPriority()}"></p></td>
-                <td><p class="status" th:text="${report.getStatus()}"></p></td>
-            </tr>
-        </table>
+            </table>
+        </div>
     </div>
 </body>
-
-
 </html>
 
 
