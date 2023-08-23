@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.CfsaUser;
+import pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Departments;
 import pl.chmielewski.CfsaSuite.LoginModule.repository.CfsaUserRepo;
 
 @Component
@@ -23,6 +24,7 @@ public class Start {
         cfsaUser1.setPassword(passwordEncoder.encode("blazej.chmielewski@cfsa.pl"));
         cfsaUser1.setEnable(true);
         cfsaUser1.setAdmin(true);
+        cfsaUser1.setDepartments(Departments.BAIO);
         cfsaUserRepo.save(cfsaUser1);
 
         CfsaUser cfsaUser2 = new CfsaUser();
@@ -38,5 +40,12 @@ public class Start {
         cfsaUser3.setEnable(true);
         cfsaUser3.setAdmin(true);
         cfsaUserRepo.save(cfsaUser3);
+
+        CfsaUser cfsaUser4 = new CfsaUser();
+        cfsaUser4.setUsername("a");
+        cfsaUser4.setPassword(passwordEncoder.encode("a"));
+        cfsaUser4.setEnable(true);
+        cfsaUser4.setAdmin(true);
+        cfsaUserRepo.save(cfsaUser4);
     }
 }
