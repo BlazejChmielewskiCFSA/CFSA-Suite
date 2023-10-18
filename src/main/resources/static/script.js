@@ -73,4 +73,52 @@ window.onload = function() {
           });
         });
 
+      function updateCheckbox() {
+                  var selectElement = document.getElementById("status");
+                  var checkboxElement = document.getElementById("statusValue");
+                  checkboxElement.checked = selectElement.value !== "default";
+              }
+
+              const dropArea = document.getElementById('dropArea');
+              const fileInput = document.getElementById('fileInput');
+      
+              dropArea.addEventListener('dragover', (event) => {
+                  event.preventDefault();
+                  dropArea.classList.add('active');
+              });
+      
+              dropArea.addEventListener('dragleave', () => {
+                  dropArea.classList.remove('active');
+              });
+      
+              dropArea.addEventListener('drop', (event) => {
+                  event.preventDefault();
+                  dropArea.classList.remove('active');
+      
+                  const files = event.dataTransfer.files;
+                  handleFiles(files);
+              });
+      
+              fileInput.addEventListener('change', () => {
+                  const files = fileInput.files;
+                  handleFiles(files);
+              });
+      
+              function handleFiles(files) {
+                  // Tutaj możesz wykonać dowolne operacje na przesłanych plikach
+                  for (const file of files) {
+                      console.log('Przesłany plik:', file.name);
+                  }
+              }
+              const fileList = document.getElementById('fileList');
+      
+      function handleFiles(files) {
+          for (const file of files) {
+              console.log('Przesłany plik:', file.name);
+      
+              const listItem = document.createElement('li');
+              listItem.textContent = file.name;
+              fileList.appendChild(listItem);
+          }
+      }
 };

@@ -14,7 +14,10 @@ import pl.chmielewski.CfsaSuite.LoginModule.service.UserService;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -83,19 +86,33 @@ public class MainController {
     public String getReportFormView(Model model) {
         Report report = new Report();
         model.addAttribute("newReportForm", report);
+
+        List<Departments> allDepartments = Arrays.asList(Departments.values()); // Lista wszystkich działów
+        Map<Departments, List<CfsaUser>> departmentEmployeesMap = new HashMap<>();
+
+        for (Departments department : allDepartments) {
+            List<CfsaUser> employees = userService.getUsersByDepartment(department);
+            departmentEmployeesMap.put(department, employees);
+        }
+
+        model.addAttribute("departmentEmployeesMap", departmentEmployeesMap);
         return "report-form";
     }
 
     @PostMapping("/addReport")
-    public String sendReportFormPost(@ModelAttribute Report report) {
-        reportService.addNewReport(report);
+    public String sendReportFormPost(@RequestParam String header,
+                                     @RequestParam String body,
+                                     @RequestParam Priority priority,
+                                     @RequestParam List<Long> assignedUsers) {
+        List<CfsaUser> allUsersById = userService.findAllUsersById(assignedUsers);
+        reportService.addNewReport(header, body, priority, allUsersById);
         return "redirect:/reports";
     }
 
     @GetMapping("/reports")
     public String forUser(Model model) {
         List<Report> ReportsListMadeByLoggedUser = reportService.getAllReports().stream()
-                .filter(n -> n.getOwner().equals(userService.getLoggedUserHisUsername()))
+                .filter(n -> n.getCreatedBy().equals(userService.getLoggedUserHisUsername()))
                 .collect(Collectors.toList());
         model.addAttribute("departments", Departments.values());
         model.addAttribute("ReportsListMadeByLoggedUser", ReportsListMadeByLoggedUser);
@@ -106,8 +123,17 @@ public class MainController {
     @GetMapping("/report/{id}")
     public String reportDetails(@PathVariable Long id, Model model) {
         Report report = reportService.getReportById(id);
-        model.addAttribute("report", report);
+        model.addAttribute("reportDetails", report);
         return "report-details";
     }
 
+    @GetMapping("/aplications")
+    public String getAplication(){
+        return "aplications";
+    }
+
+    @GetMapping("/aplications/dlugi-info")
+    public String getDlugiInfo(){
+        return "aplications/dlugi-info";
+    }
 }

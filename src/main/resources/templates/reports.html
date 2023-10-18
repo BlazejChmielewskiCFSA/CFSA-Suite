@@ -58,11 +58,21 @@
                     <input placeholder="Wpisz fraze do wyszukania">
                     <button class="reports-single-filter-button" type="submit">Wyszukaj</button>
                 </div>
-                
             </form>
             </div>
         </div>
+        <div class="report-function-buttons-container">
+            <div>
+                <a th:href="@{/report-form}"><button class="reports-add-button">Stwórz</button></a>
+            </div>
+            <div>
+                <form th:action="@{/addFilter}" method="post">
+                    <button class="reports-showMine-button" type="submit">Pokaż moje</button>
+                </form>
+            </div>
+        </div>
     </div>
+
     <div class="zgloszenia-main-content">
             <table class="table-my-reports" >
                 <thead>

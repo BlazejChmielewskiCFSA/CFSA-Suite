@@ -7,12 +7,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.CfsaUser;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.VerificationToken;
+import pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Departments;
 import pl.chmielewski.CfsaSuite.LoginModule.repository.CfsaUserRepo;
 import pl.chmielewski.CfsaSuite.LoginModule.repository.VerificationTokenRepo;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -47,19 +50,38 @@ public class UserService {
         mailSenderService.sendMail(cfsaUser.getUsername(), "Verification Token", url, false);
     }
 
+    public List<CfsaUser> findAllUsersById(List<Long> id){
+        return cfsaUserRepo.findAllById(id);
+    }
+
     public void verifyToken(String token) {
         CfsaUser cfsaUser = verificationTokenRepo.findByValue(token).getCfsaUser();
         cfsaUser.setEnable(true);
         cfsaUserRepo.save(cfsaUser);
     }
 
-    public String getLoggedUserHisUsername(){
+    public CfsaUser getLoggedUserHisUsername(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName();
+        String name = authentication.getName();
+        return cfsaUserRepo.findUserByUsername(name);
+    }
+
+    public List<CfsaUser> getUsersByIds(List<Long> ids){
+        return cfsaUserRepo.findAllById(ids);
     }
 
     public CfsaUser getUserByUsername(String username){
         return cfsaUserRepo.findAllByUsername(username);
     }
+
+   public List<CfsaUser> getUsersByDepartment(Departments departments){
+        return cfsaUserRepo.findAll().stream()
+                .filter(n->n.getDepartments().equals(departments))
+                .collect(Collectors.toList());
+   }
+
+   public List<String> getUsersNameByIds(List<Long> ids){
+       return cfsaUserRepo.findUsernamesByIdIn(ids);
+   }
 
 }

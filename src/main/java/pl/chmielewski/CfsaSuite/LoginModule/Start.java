@@ -32,6 +32,7 @@ public class Start {
         cfsaUser2.setPassword(passwordEncoder.encode("arkadiusz.drezek@cfsa.pl"));
         cfsaUser2.setEnable(true);
         cfsaUser2.setAdmin(true);
+        cfsaUser2.setDepartments(Departments.BAIO);
         cfsaUserRepo.save(cfsaUser2);
 
         CfsaUser cfsaUser3 = new CfsaUser();
@@ -39,6 +40,7 @@ public class Start {
         cfsaUser3.setPassword(passwordEncoder.encode("ilona.stronkowska@cfsa.pl"));
         cfsaUser3.setEnable(true);
         cfsaUser3.setAdmin(true);
+        cfsaUser3.setDepartments(Departments.BI);
         cfsaUserRepo.save(cfsaUser3);
 
         CfsaUser cfsaUser4 = new CfsaUser();
@@ -46,6 +48,7 @@ public class Start {
         cfsaUser4.setPassword(passwordEncoder.encode("a"));
         cfsaUser4.setEnable(true);
         cfsaUser4.setAdmin(true);
+        cfsaUser4.setDepartments(Departments.BI);
         cfsaUserRepo.save(cfsaUser4);
     }
 }

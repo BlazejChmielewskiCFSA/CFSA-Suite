@@ -9,13 +9,13 @@
 </head>
 <body>
 <nav>
-    <a class="logo" href="http://localhost:8080/home">
+    <a class="logo" th:href="@{/home}">
         <img th:src="@{/img/logo.png}" alt="logo"/>
     </a>
     <div>
         <ul class="nav-links">
             <li><a th:href="@{/reports}">Zgłoszenia</a></li>
-            <li><a href="#">Aplikacje</a></li>
+            <li><a th:href="@{/aplications}">Aplikacje</a></li>
             <li><a href="#">Konto</a></li>
         </ul>
     </div>

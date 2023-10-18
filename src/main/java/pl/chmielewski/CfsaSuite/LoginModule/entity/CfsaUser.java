@@ -23,8 +23,23 @@ public class CfsaUser implements UserDetails {
     private Departments departments;
     private boolean isEnable;
     private boolean isAdmin = false;
-    @OneToMany(mappedBy = "cfsaUser", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @OneToMany(mappedBy = "createdBy")
     private List<Report> reports = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "assignedUsers")
+    private List<Report> assignedReports = new ArrayList<>();
+
+    public CfsaUser() {
+    }
+
+    public List<Report> getAssignedReports() {
+        return assignedReports;
+    }
+
+    public void setAssignedReports(List<Report> assignedReports) {
+        this.assignedReports = assignedReports;
+    }
 
     public List<Report> getReports() {
         return reports;
@@ -50,15 +65,6 @@ public class CfsaUser implements UserDetails {
         isEnable = enable;
     }
 
-    public CfsaUser() {
-    }
-
-    public CfsaUser(Long id, String username, String password, Departments departments) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.departments = departments;
-    }
 
     public Long getId() {
         return id;

@@ -4,6 +4,8 @@ import pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Priority;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Status;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "reports")
@@ -14,33 +16,46 @@ public class Report {
     private Long id;
     private String header;
     private String body;
-    private String owner;
     private Priority priority;
     private Status status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cfsauser_id")
-    private CfsaUser cfsaUser;
+    @ManyToOne
+    @JoinColumn(name = "created_by_user_id")
+    private CfsaUser createdBy;
+
+    @ManyToMany
+    @JoinTable(
+            name = "Report_Users",
+            joinColumns = @JoinColumn(name = "report_id"),
+            inverseJoinColumns = @JoinColumn(name = "cfsa_user_id")
+    )
+    private List<CfsaUser> assignedUsers = new ArrayList<>();
+
 
     public Report() {
     }
 
-    public Report(Long id, String header, String body, String owner, Priority priority, Status status, CfsaUser cfsaUser) {
-        this.id = id;
+    public Report(String header, String body, Priority priority, List<CfsaUser> assignedUsers) {
         this.header = header;
         this.body = body;
-        this.owner = owner;
         this.priority = priority;
-        this.status = status;
-        this.cfsaUser = cfsaUser;
+        this.assignedUsers = assignedUsers;
     }
 
-    public CfsaUser getCfsaUser() {
-        return cfsaUser;
+    public CfsaUser getCreatedBy() {
+        return createdBy;
     }
 
-    public void setCfsaUser(CfsaUser cfsaUser) {
-        this.cfsaUser = cfsaUser;
+    public void setCreatedBy(CfsaUser createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public List<CfsaUser> getAssignedUsers() {
+        return assignedUsers;
+    }
+
+    public void setAssignedUsers(List<CfsaUser> assignedUsers) {
+        this.assignedUsers = assignedUsers;
     }
 
     public Long getId() {
@@ -67,13 +82,6 @@ public class Report {
         this.body = body;
     }
 
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
 
     public Priority getPriority() {
         return priority;

@@ -30,8 +30,10 @@
             th:value="${departments}"
             th:text="${departments}"></option>
   </select>
+  
   <input class="btn-login margin-top"  type="submit" value="Zarejestruj"/>
+  <a class="registration-href" th:href="@{/login}">Masz juz konto? Przejdź do logowania</a>
 </form>
-  <a th:href="@{/login}">Masz juz konto? Przejdź do logowania</a>
+  
 </body>
 </html>

@@ -2,6 +2,7 @@ package pl.chmielewski.CfsaSuite.LoginModule.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.chmielewski.CfsaSuite.LoginModule.entity.CfsaUser;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.Report;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Departments;
 import pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Priority;
@@ -34,14 +35,15 @@ public class ReportService {
         return reportRepo.findAllById(id);
     }
 
-    public void addNewReport(Report newReport) {
-        String header = newReport.getHeader().substring(0, 1).toUpperCase() + newReport.getHeader().substring(1);
-        newReport.setOwner(userService.getLoggedUserHisUsername());
-        newReport.setHeader(header);
-        newReport.setStatus(Status.Oczekujacy);
-        newReport.setCfsaUser(userService.getUserByUsername(userService.getLoggedUserHisUsername()));
-        reportList.add(newReport);
-        reportRepo.save(newReport);
+    public void addNewReport(String header, String body, Priority priority,List<CfsaUser> userList) {
+        Report report = new Report(header, body, priority, userList);
+        report.setHeader(header.substring(0, 1).toUpperCase() + header.substring(1));
+        report.setBody(body);
+        report.setPriority(priority);
+        report.setStatus(Status.Oczekujacy);
+        report.setCreatedBy(userService.getLoggedUserHisUsername());
+        report.setAssignedUsers(userList);
+        reportRepo.save(report);
     }
 
     public List<Report> filtredList(Boolean statusValue,
@@ -80,7 +82,7 @@ public class ReportService {
     public List<Report> filterDepartment(List<Report> list, Boolean departmentValue, Departments departments) {
         if (departmentValue) {
             return list.stream()
-                    .filter(n -> n.getCfsaUser().getDepartments().equals(departments))
+                    .filter(n -> n.getCreatedBy().getDepartments().equals(departments))
                     .collect(Collectors.toList());
         } else return list;
     }

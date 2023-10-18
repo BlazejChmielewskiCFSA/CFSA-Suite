@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www/thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <div th:replace="home :: link"></div>
+</head>
+<body>
+<div th:replace="home :: nav"></div>
+<h1>Dlugi info</h1>
+
+<form method="POST" action="/upload" enctype="multipart/form-data">
+  <input type="file" name="file" />
+  <input type="submit" value="Prześlij" />
+</form>
+
+
+</body>
+</html>

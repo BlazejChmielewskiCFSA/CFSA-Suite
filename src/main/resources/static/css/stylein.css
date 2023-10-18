@@ -84,13 +84,11 @@ button:hover {
     -webkit-box-shadow: 0px 0px 20px -3px rgba(66, 68, 90, 1);
     -moz-box-shadow: 0px 0px 20px -3px rgba(66, 68, 90, 1);
     box-shadow: 0px 0px 20px -3px rgba(66, 68, 90, 1);
-    
 }
 
 .ti-upper-container img {
     transform:scale(140%);
     transition: var(--tran-10);
-    
 }
 
 .ti-upper-container {
@@ -338,7 +336,6 @@ button:hover {
     cursor: pointer;
 }
 
-
 .reports-single-filter-select option {
     background-color: #f3f3f3;
     color: black;
@@ -356,11 +353,8 @@ button:hover {
 }
 
 .reports-single-filter-button:hover {
-    background-color: rgb(44, 44, 44);
+    background-color: rgb(84, 84, 84);
 }
-
-
-
 
 .reports-search {
     height: 60px;
@@ -383,17 +377,194 @@ button:hover {
 }
 
 .reports-main-center {
-    padding: 10px;
+    padding: 8px;
 }
 
 .reports-search-box input{
     border: 1px black solid;
     height: 25px;
+    weight: 185px;
     padding: 10px;
+
     margin-bottom: 10px;
     border-radius: 10px;
     outline: none;
 }
 
+.report-function-buttons-container {
+    float: right;
+    weight: 120px;
+}
+
+.reports-add-button {
+    height: 25px;
+    width: 120px;
+    margin-bottom: 5px;
+    padding: 4px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.reports-showMine-button {
+    height: 25px;
+    width: 120px;
+    padding: 4px;
+    font-size: 14px;
+    background-color: rgb(64, 64, 64);
+    text-align: center;
+}
+
+.reports-showMine-button:hover {
+    background-color: rgb(84, 84, 84);
+}
+
+/*--------------------| report-form |-------------------- */
+
+.report-form-main-container {
+    width: 800px;
+    height: 600px;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+
+.report-form-left-side {
+    width: 400px;
+    height: 600px;
+    padding: 20px;
+    font-size: 20px;
+    border: 1px solid black;
+    color: black;
+    background-color: rgb(47, 146, 98,1);
+    text-align: left;
+    border-radius: 20px 0 0 20px;
+    
+}
+
+.report-form-right-side {
+    width: 400px;
+    height: 600px;
+    padding: 20px;
+    border: 1px solid black;
+    color: #23252A;
+    background-color: white;
+    border-radius: 0 20px 20px 0;
+}
+
+.report-form-left-side label{
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.report-form-left-title {
+    padding: 0 5px;
+    width: 360px;
+    height: 600px;
+    height: 30px;
+    border-radius: 10px;
+    font-size: 15px;
+    border: 1px solid black;
+}
+
+.report-form-left-side input, textarea{
+    margin-top: 5px;
+}
+
+.report-form-left-textarea {
+    width: 360px;
+    padding: 3px 5px;
+    border-radius: 10px;
+    font-size: 15px;
+    border: 1px solid black;
+}
+
+.drop-area {
+    height: 100px;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.report-form-left-file-button {
+    width: 360px;
+    text-align: center;
+}
+
+.report-form-left-title-container{
+    margin-bottom: 15px;
+}
+
+.report-form-left-body-container{
+    margin-bottom: 15px;
+}
+
+.report-form-left-priority-container {
+    margin-top: 10px;
+    display: flex;
+}
+
+.report-form-left-priority-container select {
+    margin-left: 10px;
+}
+
+.report-form-left-button-container {
+    width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 30px;
+}
+.report-form-right-li-department {
+    color: black;
+}
+
+.report-form-left-side button {
+    background-color: #23252A;
+}
+
+.report-form-left-side button:hover {
+    background-color: #34363B;
+}
+
+.report-form-right-li-container li, ul{
+    align-items: center;
+    list-style-type: none;
+}
+
+.report-form-right-li-center {
+    display: flex;
+    padding: 0px 5px;
+}
+
+.report-form-right-li-users{
+    color:#23252A;
+}
+
+.report-form-right-li-center span {
+    margin-left: 5px;
+}
+
+.report-form-right-side ul li span {
+    cursor: pointer;
+}
+
+.report-form-right-side ul li div {
+    display: none;
+}
+
+.report-form-right-side ul li:hover div {
+    display: block;
+}
+
+.report-form-right-zalaczniki {
+    margin-top: 15px;
+}
 
 /*--------------------|  |-------------------- */

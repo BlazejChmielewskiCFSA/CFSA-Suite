@@ -4,22 +4,51 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <div th:replace="home :: link"></div>
+    <!--    <link rel="stylesheet" type="text/css" href="../static/css/stylein.css"/>-->
+    <!--    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,200&display=swap"-->
+    <!--          rel="stylesheet"/>-->
+    <!--    <script src="../static/script.js"></script>-->
+    <script src="/script.js"></script>
 </head>
 <body>
 <div th:replace="home :: nav"></div>
-<div>
-    <form th:object="${newReportForm}" th:action="@{addReport}" method="post">
-        <label>Tytuł</label><input type="text" th:field="*{header}" />
-        <label>Ciało</label><input type="text" th:field="*{body}"/>
-        <label>Priorytet</label>
-        <select id="priority" name="priority" th:field="*{priority}">
-            <option th:each="priority : ${T(pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Priority).values()}"
-                    th:value="${priority}"
-                    th:text="${priority}">
-            </option>
-        </select>
-        <button type="submit" value="addNewReport">Wyślij</button>
-    </form>
-</div>
+<form th:object="${newReportForm}" th:action="@{addReport}" method="post" class="report-form-main-container">
+    <div class="report-form-left-side">
+        <div class="report-form-left-title-container"><label>Tytuł zgłosznia</label><input class="report-form-left-title" type="text" th:field="*{header}" placeholder="Wprowadź tytuł zgłoszenia" required /></div>
+        <div class="report-form-left-body-container"><label>Treść zgłoszenia</label><textarea class="report-form-left-textarea" th:field="*{body}" required rows="10" cols="40" placeholder="Wprowadź treść zgłoszenia"></textarea></div>
+        <div id="dropArea" class="drop-area">
+            Przeciągnij i upuść plik lub kliknij, aby wybrać plik.
+        </div>
+        <div class="report-form-left-file-button"><input type="file" id="fileInput" multiple></div>
+        <ul id="fileList"></ul>
+        <div class="report-form-left-priority-container"><label>Priorytet</label>
+            <select id="priority" name="priority" th:field="*{priority}">
+                <option th:each="priority : ${T(pl.chmielewski.CfsaSuite.LoginModule.entity.enums.Priority).values()}"
+                        th:value="${priority}"
+                        th:text="${priority}">
+                </option>
+            </select>
+        </div>
+        <div class="report-form-left-button-container"><button class="report-form-left-button" type="submit" value="addNewReport">Wyślij zgłoszenie</button></div>
+    </div>
+    <div class="report-form-right-side">
+        <h3>Dodaj osoby do zgłoszenia:</h3>
+        <ul th:each="entry : ${departmentEmployeesMap}">
+            <li class="report-form-right-li-department">
+                <h4><span th:text="${entry.key}"></span></h4>
+                <div th:each="user : ${entry.value}" class="report-form-right-li-user">
+                    <input type="checkbox" id="selectedUser" name="selectedUsers" th:value="${user.getId()}"/>
+                    <span th:text="${user.username}"></span>
+                </div>
+            </li>
+        </ul>
+        <div class="report-form-right-zalaczniki">
+            <h2>Załączniki</h2>
+        </div>
+    </div>
+    <div th:each="i : ${ez}">
+        <p th:text="${i}"></p>
+    </div>
+</form>
 </body>
 </html>
